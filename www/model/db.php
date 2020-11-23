@@ -1,5 +1,5 @@
 <?php
-
+//データベースへの接続
 function get_db_connect(){
   // MySQL用のDSN文字列
   $dsn = 'mysql:dbname='. DB_NAME .';host='. DB_HOST .';charset='.DB_CHARSET;
@@ -15,7 +15,7 @@ function get_db_connect(){
   }
   return $dbh;
 }
-
+//データをfetchで取得
 function fetch_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
@@ -26,7 +26,7 @@ function fetch_query($db, $sql, $params = array()){
   }
   return false;
 }
-
+//データをfetchallで取得
 function fetch_all_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
@@ -37,7 +37,7 @@ function fetch_all_query($db, $sql, $params = array()){
   }
   return false;
 }
-
+//sqlの実行
 function execute_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);

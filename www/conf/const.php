@@ -1,6 +1,7 @@
 <?php
 
-define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../model/');
+define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../model/'); 
+//$_SERVER['DOCUMENT_ROOT']; urlの？以降の文字列を取得
 define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../view/');
 
 
