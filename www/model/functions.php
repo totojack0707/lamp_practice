@@ -1,51 +1,51 @@
 <?php
-
+//var_dumpの呼び出し
 function dd($var){
   var_dump($var);
   exit();
 }
-
+//$urlのページへ遷移
 function redirect_to($url){
   header('Location: ' . $url);
   exit;
 }
-
+//$_GETに$nameが格納されていれば$_GET[$name];を返り値とし、そうでなければ''を返り値とする
 function get_get($name){
   if(isset($_GET[$name]) === true){
     return $_GET[$name];
   };
   return '';
 }
-
+//$nameを引数として$_POST[$name]に値が存在すれば$_POST[$name]を返し、なければ’’を返す
 function get_post($name){
   if(isset($_POST[$name]) === true){
     return $_POST[$name];
   };
   return '';
 }
-
+//$nameを引数とし$_FILES[$name]に値が存在すれば$_FILES[$name]を返し、なければ’’を返す
 function get_file($name){
   if(isset($_FILES[$name]) === true){
     return $_FILES[$name];
   };
   return array();
 }
-
+//$_SESSIONに$nameが格納されていれば$_SESSION[$name];を返り値とし、そうでなければ''を返り値とする
 function get_session($name){
   if(isset($_SESSION[$name]) === true){
     return $_SESSION[$name];
   };
   return '';
 }
-
+//$valueを$_SESSION[$name]に代入
 function set_session($name, $value){
   $_SESSION[$name] = $value;
 }
-
+//$errorを引数とし$_SESSION['__errors'][]に$errorを代入
 function set_error($error){
   $_SESSION['__errors'][] = $error;
 }
-
+//$_SESSION['__errors']を$errorsに代入した後、$_SESSION['__errors']をリセットし、$errorsを返り値とする
 function get_errors(){
   $errors = get_session('__errors');
   if($errors === ''){
@@ -54,7 +54,7 @@ function get_errors(){
   set_session('__errors',  array());
   return $errors;
 }
-
+//エラーがあればtrue、なければfalse
 function has_error(){
   return isset($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0;
 }
@@ -71,7 +71,7 @@ function get_messages(){
   set_session('__messages',  array());
   return $messages;
 }
-
+//$_SESSION['user_id']が格納されていればtrue,されてなければfalseを返す
 function is_logined(){
   return get_session('user_id') !== '';
 }

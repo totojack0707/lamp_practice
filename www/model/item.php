@@ -3,7 +3,7 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
 // DB利用
-
+//特定の商品を取得する
 function get_item($db, $item_id){
   $sql = "
     SELECT
@@ -21,7 +21,7 @@ function get_item($db, $item_id){
 
   return fetch_query($db, $sql);
 }
-
+//全ての商品を取得するsqlかstatusが公開になってる商品を取得するsqlを作成
 function get_items($db, $is_open = false){
   $sql = '
     SELECT
@@ -42,11 +42,11 @@ function get_items($db, $is_open = false){
 
   return fetch_all_query($db, $sql);
 }
-
+//全ての商品のデータを取得
 function get_all_items($db){
   return get_items($db);
 }
-
+//statusが公開の商品を取得
 function get_open_items($db){
   return get_items($db, true);
 }

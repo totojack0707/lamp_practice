@@ -1,7 +1,7 @@
 <?php
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
-
+//ログインしているユーザーのデータをusersテーブルから取得し返り値とする
 function get_user($db, $user_id){
   $sql = "
     SELECT
@@ -44,7 +44,7 @@ function login_as($db, $name, $password){
   set_session('user_id', $user['user_id']);
   return $user;
 }
-
+//正常にログインできているユーザーのデータを取得し、返り値とする
 function get_login_user($db){
   $login_user_id = get_session('user_id');
 
@@ -58,7 +58,7 @@ function regist_user($db, $name, $password, $password_confirmation) {
   
   return insert_user($db, $name, $password);
 }
-
+//$user['type']が１ならばtrue、そうでなければfalse
 function is_admin($user){
   return $user['type'] === USER_TYPE_ADMIN;
 }
