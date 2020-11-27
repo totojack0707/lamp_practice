@@ -12,7 +12,13 @@ if(is_logined() === true){
 $name = get_post('name');
 $password = get_post('password');
 $password_confirmation = get_post('password_confirmation');
-
+$token = get_post('csrf_token');
+if(is_valid_csrf_token($token) === false){
+  //エラーメッセージ
+  set_error('不正なアクセスです');
+  redirect_to(HOME_URL);
+}
+unset($_SESSION["csrf_token"]);
 $db = get_db_connect();
 
 try{
