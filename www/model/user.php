@@ -69,7 +69,7 @@ function is_valid_user($name, $password, $password_confirmation){
   $is_valid_password = is_valid_password($password, $password_confirmation);
   return $is_valid_user_name && $is_valid_password ;
 }
-
+//バリデーション
 function is_valid_user_name($name) {
   $is_valid = true;
   if(is_valid_length($name, USER_NAME_LENGTH_MIN, USER_NAME_LENGTH_MAX) === false){
@@ -82,7 +82,7 @@ function is_valid_user_name($name) {
   }
   return $is_valid;
 }
-
+//バリデーション
 function is_valid_password($password, $password_confirmation){
   $is_valid = true;
   if(is_valid_length($password, USER_PASSWORD_LENGTH_MIN, USER_PASSWORD_LENGTH_MAX) === false){
@@ -99,7 +99,7 @@ function is_valid_password($password, $password_confirmation){
   }
   return $is_valid;
 }
-
+//インサート
 function insert_user($db, $name, $password){
   $sql = "
     INSERT INTO
