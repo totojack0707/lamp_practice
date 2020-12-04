@@ -205,3 +205,50 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+//公開されている全商品数を求める
+function count_items($db){
+  $sql = " 
+    SELECT COUNT(*) AS count FROM items
+    WHERE status = 1
+  ";
+  return fetch_query($db, $sql);
+}
+//必要なページ数を求める
+function full_page($count){
+  return ceil($count / PAGE_VIEW_MAX);
+}
+//現在いるページのページ番号を取得
+function get_page(){
+  if(!isset($_GET['page_id'])){ 
+    $now = 1;
+  }else{
+    $now = $_GET['page_id'];
+  }
+  return $now;
+} 
+//開始位置
+function now_page($now){
+  if ($now == 1){
+    $start = $now - 1;
+  } else {
+    $start = ($now - 1) * 8;
+  }
+  return $start;
+}  
+//８件ごとに取得
+function get_limit_items($db, $start){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status
+    FROM
+      items
+    LIMIT 
+      :start,:max
+  ';
+  return fetch_all_query($db, $sql, array(':start' => $start, ':max' => PAGE_VIEW_MAX));
+}

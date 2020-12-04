@@ -43,7 +43,26 @@
       <?php } ?>
       </div>
     </div>
+    <div class="page mt-5">
+      <nav aria-label="Page navigation  ">
+        <ul class="pagination justify-content-center">
+          <?php if($now !== 1){ ?>
+            <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($now - 1));?>">Prev</a></li>
+          <?php } ?>
+          <?php
+            for ( $n = 1; $n <= $full_page; $n ++){
+              if ( $n === $now ){ ?>
+                  <li class="page-item active "><span class="page-link" ><?php print h($now);?><span class="sr-only">(current)</span></span></li>
+              <?php }else{ ?>
+                <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($n));?>"><?php print(h($n));?></a></li>
+              <?php } ?>
+            <?php } ?>       
+          <?php if($now !== $full_page){ ?>
+            <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($now + 1));?>">Next</a></li>
+          <?php } ?>
+        </ul>
+      </nav>
+    </div>       
+    <h6 class="text-center mb-5"><?php print(h($count['count']));?>件中 <?php print(h($start + 1));?> - <?php print(h(min($start + 8, $count['count'])));?>件目の商品</h6>       
   </div>
-  
 </body>
-</html>

@@ -12,8 +12,19 @@ if(is_logined() === false){
 
 $db = get_db_connect();
 $user = get_login_user($db);
+//公開されている全商品数を求める
+$count = count_items($db);
 
-$items = get_open_items($db);
+//総合ページ数を求める
+$full_page = (int)full_page($count['count']);
+//現在いるページのページ番号を取得
+$now = (int)get_page();
+
+//開始位置
+$start = now_page($now);
+//８件ごとに取得
+$items = get_limit_items($db, $start);
+
 //トークンの生成
 $token = get_csrf_token();
 
