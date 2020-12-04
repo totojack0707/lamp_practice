@@ -254,7 +254,7 @@ function get_limit_items($db, $start, $sort){
   } else if($sort === 2){
     $sql .= 'ORDER BY price asc
             LIMIT :start,:max';
-  } else if($sort === 3){
+  } else if($sort === 3) {
     $sql .= 'ORDER BY price desc
              LIMIT :start,:max';
   } else {
