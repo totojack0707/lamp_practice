@@ -12,6 +12,9 @@ if(is_logined() === false){
 
 $db = get_db_connect();
 $user = get_login_user($db);
+//ソート
+$sort = (int)get_get('sort');
+//dd($sort);
 //公開されている全商品数を求める
 $count = count_items($db);
 
@@ -23,7 +26,7 @@ $now = (int)get_page();
 //開始位置
 $start = now_page($now);
 //８件ごとに取得
-$items = get_limit_items($db, $start);
+$items = get_limit_items($db, $start, $sort);
 
 //トークンの生成
 $token = get_csrf_token();

@@ -236,7 +236,7 @@ function now_page($now){
   return $start;
 }  
 //８件ごとに取得
-function get_limit_items($db, $start){
+function get_limit_items($db, $start, $sort){
   $sql = '
     SELECT
       item_id, 
@@ -247,8 +247,19 @@ function get_limit_items($db, $start){
       status
     FROM
       items
-    LIMIT 
-      :start,:max
   ';
+  if($sort === 1) {
+    $sql .= ' ORDER BY item_id desc
+              LIMIT :start,:max';
+  } else if($sort === 2){
+    $sql .= 'ORDER BY price asc
+            LIMIT :start,:max';
+  } else if($sort === 3) {
+    $sql .= 'ORDER BY price desc
+             LIMIT :start,:max';
+  } else {
+    $sql .= ' ORDER BY item_id desc
+            LIMIT :start,:max';
+  }
   return fetch_all_query($db, $sql, array(':start' => $start, ':max' => PAGE_VIEW_MAX));
 }

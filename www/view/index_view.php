@@ -12,10 +12,24 @@
   
 
   <div class="container">
-    <h1>商品一覧</h1>
+    <div class="d-inline">
+      <ul class="list-unstyled list-group-horizontal ">
+        <li class=""><h1 class="">商品一覧</h1></li>
+        <li class="text-right"><div class="dropdown ">
+          <form method='get'>
+            <select name='sort'>
+              <option value='1' name="newer">新着順</option>
+              <option value='2' name="cheap">価格の低い順</option>
+              <option value='3' name="expensive">価格の高い順</option>
+            </select>
+            <input type='submit' value='並び替え' />
+          </form>
+        </div></li>
+      </ul>  
+    </div>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
-    <div class="card-deck">
+    <div class="card-deck mt-5">
       <div class="row">
       <?php foreach($items as $item){ ?>
         <div class="col-6 item">
@@ -47,18 +61,18 @@
       <nav aria-label="Page navigation  ">
         <ul class="pagination justify-content-center">
           <?php if($now !== 1){ ?>
-            <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($now - 1));?>">Prev</a></li>
+            <li class="page-item"><a class="page-link" href="./index.php?sort=<?php print(h($sort));?>&page_id=<?php print(h($now - 1));?>">Prev</a></li>
           <?php } ?>
           <?php
             for ( $n = 1; $n <= $full_page; $n ++){
               if ( $n === $now ){ ?>
                   <li class="page-item active "><span class="page-link" ><?php print h($now);?><span class="sr-only">(current)</span></span></li>
               <?php }else{ ?>
-                <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($n));?>"><?php print(h($n));?></a></li>
+                <li class="page-item"><a class="page-link" href="./index.php?sort=<?php print(h($sort));?>&page_id=<?php print(h($n));?>"><?php print(h($n));?></a></li>
               <?php } ?>
             <?php } ?>       
           <?php if($now !== $full_page){ ?>
-            <li class="page-item"><a class="page-link" href="./index.php?page_id=<?php print(h($now + 1));?>">Next</a></li>
+            <li class="page-item"><a class="page-link" href="./index.php?sort=<?php print(h($sort));?>&page_id=<?php print(h($now + 1));?>">Next</a></li>
           <?php } ?>
         </ul>
       </nav>
